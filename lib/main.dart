@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tiktok_clone/main/my_app.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Supabase.initialize(
+    url: const String.fromEnvironment('supabase-url'),
+    anonKey: const String.fromEnvironment("supabase-key"),
+  );
+
+  runApp(
+    const MyApp(),
+  );
 }
