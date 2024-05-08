@@ -12,3 +12,10 @@ class FetchDataEvent extends ForyouEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetByIdEvent extends ForyouEvent {
+  final int id;
+  const GetByIdEvent({required this.id});
+  @override
+  List<Object> get props => [id];
+}

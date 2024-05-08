@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tiktok_clone/features/home/domain/models/fouryou_model.dart';
+import 'package:tiktok_clone/features/home/ui/bloc/bloc/foryou_bloc.dart';
 import 'package:tiktok_clone/shared/constants/colors.dart';
 import 'package:tiktok_clone/shared/constants/icons_svg.dart';
 
@@ -10,6 +12,7 @@ class FloatingButtonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+
     return Align(
       alignment: const AlignmentDirectional(1, 0.7),
       child: Padding(

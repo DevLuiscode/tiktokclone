@@ -17,10 +17,14 @@ class ForyouPage extends StatelessWidget {
     return BlocBuilder<ForyouBloc, ForyouState>(
       builder: (context, state) {
         if (state.status == ForyouStatus.loading) {
-          return const Center(
-              child: CircularProgressIndicator(
+          return Container(
             color: Colors.black,
-          ));
+            child: const Center(
+              child: CircularProgressIndicator(
+                color: Colors.white38,
+              ),
+            ),
+          );
         } else {
           return Container(
             height: size.height,

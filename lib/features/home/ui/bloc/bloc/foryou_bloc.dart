@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:tiktok_clone/features/home/domain/models/foryou_profile_model.dart';
 import 'package:tiktok_clone/features/home/domain/models/fouryou_model.dart';
 import 'package:tiktok_clone/features/home/domain/repositories/foryou_repository.dart';
 
@@ -11,8 +12,10 @@ part 'foryou_state.dart';
 class ForyouBloc extends Bloc<ForyouEvent, ForyouState> {
   final ForyouRepository foryouRepository;
   ForyouBloc({required this.foryouRepository})
-      : super(const ForyouState(foryouList: [], status: ForyouStatus.initial)) {
+      : super(const ForyouState(
+            foryouList: [], status: ForyouStatus.initial, profilesList: [])) {
     on<FetchDataEvent>(fetchDataEventState);
+    on<GetByIdEvent>(getByIdEventState);
   }
 
   FutureOr<void> fetchDataEventState(
@@ -33,6 +36,21 @@ class ForyouBloc extends Bloc<ForyouEvent, ForyouState> {
       emit(
         state.copyWith(status: ForyouStatus.error),
       );
+    }
+  }
+
+  FutureOr<void> getByIdEventState(
+      GetByIdEvent event, Emitter<ForyouState> emit) async {
+    final profileList = [...state.profilesList];
+    try {
+      final response = await foryouRepository.getProfileId(idUser: event.id);
+
+      profileList.add(response);
+      print(profileList);
+
+      emit(state.copyWith(profilesList: profileList));
+    } catch (e) {
+      emit(state.copyWith(status: ForyouStatus.error));
     }
   }
 }
