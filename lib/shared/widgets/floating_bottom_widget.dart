@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tiktok_clone/features/home/domain/models/fouryou_model.dart';
 import 'package:tiktok_clone/shared/constants/colors.dart';
 import 'package:tiktok_clone/shared/constants/icons_svg.dart';
 
 class FloatingButtonsWidget extends StatelessWidget {
-  const FloatingButtonsWidget({
-    super.key,
-  });
-
+  const FloatingButtonsWidget({super.key, required this.item});
+  final ForYouModel item;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -48,25 +47,25 @@ class FloatingButtonsWidget extends StatelessWidget {
             const SizedBox(height: 12),
             SvgPicture.asset(IconsSvg.favorite),
             Text(
-              "31,9 mill",
+              "${item.like} mill",
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
             SvgPicture.asset(IconsSvg.comments),
             Text(
-              "546",
+              item.comment,
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
             SvgPicture.asset(IconsSvg.save),
             Text(
-              "1345",
+              item.save,
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
             SvgPicture.asset(IconsSvg.share),
             Text(
-              "2764",
+              item.share,
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),

@@ -101,10 +101,11 @@ class _FollowingPageState extends State<FollowingPage> {
                         child: index == _currentPage
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: VideoPlayerWidget(
-                                  key: ValueKey<int>(index),
+                                child: const VideoPlayerWidget(
                                   play: true,
                                   ktoplbarheigh: false,
+                                  url:
+                                      'https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/videos/video4.mp4',
                                 ),
                               )
                             : ClipRRect(
@@ -112,6 +113,8 @@ class _FollowingPageState extends State<FollowingPage> {
                                 child: const VideoPlayerWidget(
                                   play: false,
                                   ktoplbarheigh: false,
+                                  url:
+                                      'https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/videos/video4.mp4',
                                 ),
                               ),
                       ),

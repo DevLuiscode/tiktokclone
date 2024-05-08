@@ -7,9 +7,11 @@ class VideoPlayerWidget extends StatefulWidget {
     super.key,
     required this.play,
     required this.ktoplbarheigh,
+    required this.url,
   });
   final bool play;
   final bool ktoplbarheigh;
+  final String url;
 
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
@@ -20,8 +22,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _controller;
   @override
   void initState() {
-    var uri = Uri.parse(
-        "https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/videos/video1.mp4?t=2024-05-07T22%3A32%3A06.325Z");
+    var uri = Uri.parse(widget.url);
     _controller = VideoPlayerController.networkUrl(uri)
       ..initialize().then((_) {
         setState(() {
@@ -35,7 +36,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           // Actualizar el aspect ratio del widget AspectRatio
           _aspectRatio = aspectRatio;
           if (widget.play) _controller.play();
-          _controller.setLooping(false);
+          _controller.setLooping(true);
         });
       });
     super.initState();
@@ -87,7 +88,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             size: 80,
             color: _controller.value.isPlaying
                 ? Colors.transparent
-                : Colors.grey.withOpacity(0.4),
+                : Colors.grey.withOpacity(0.1),
           ),
         )
       ],
