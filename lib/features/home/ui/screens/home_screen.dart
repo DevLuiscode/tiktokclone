@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tiktok_clone/features/home/data/datasource/network/foryou_datasource_ntw.dart';
+import 'package:tiktok_clone/features/home/data/datasource/network/datasource_ntw.dart';
 import 'package:tiktok_clone/features/home/data/repositories/fouryou_repository_impl.dart';
-import 'package:tiktok_clone/features/home/ui/bloc/bloc/foryou_bloc.dart';
+import 'package:tiktok_clone/features/home/ui/bloc/bloc/foryou_bloc/foryou_bloc.dart';
 import 'package:tiktok_clone/features/home/ui/bloc/cubit/home_page_controller_cubit.dart';
 import 'package:tiktok_clone/features/home/ui/page/following_page.dart';
 import 'package:tiktok_clone/features/home/ui/page/foryou_page.dart';
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => ForyouBloc(
         foryouRepository: ForyouRepositoryImpl(
-          foryouDatasourcesNtw: ForyouDatasourcesNtw(),
+          foryouDatasourcesNtw: DatasourcesNtw(),
         ),
       )..add(const FetchDataEvent()),
       child: BlocBuilder<HomePageControllerCubit, HomePageControllerState>(

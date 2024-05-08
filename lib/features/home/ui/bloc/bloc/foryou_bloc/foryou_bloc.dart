@@ -24,9 +24,6 @@ class ForyouBloc extends Bloc<ForyouEvent, ForyouState> {
 
     final foryouList = [...state.foryouList];
     emit(state.copyWith(status: ForyouStatus.loading));
-
-    // print(foryouRepository.fetchAllForyou());
-
     try {
       emit(state.copyWith(foryouList: foryouList));
       final response = await foryouRepository.fetchAllForyou();
@@ -44,10 +41,7 @@ class ForyouBloc extends Bloc<ForyouEvent, ForyouState> {
     final profileList = [...state.profilesList];
     try {
       final response = await foryouRepository.getProfileId(idUser: event.id);
-
       profileList.add(response);
-      print(profileList);
-
       emit(state.copyWith(profilesList: profileList));
     } catch (e) {
       emit(state.copyWith(status: ForyouStatus.error));
