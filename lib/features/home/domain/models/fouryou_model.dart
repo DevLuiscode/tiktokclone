@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 
 class ForYouModel extends Equatable {
   final int idUser;
@@ -10,6 +9,7 @@ class ForYouModel extends Equatable {
   final String share;
   final String name;
   final String description;
+  final String imageProfile;
 
   const ForYouModel({
     required this.idUser,
@@ -20,6 +20,7 @@ class ForYouModel extends Equatable {
     required this.share,
     required this.name,
     required this.description,
+    required this.imageProfile,
   });
 
   factory ForYouModel.fromJson(Map<String, dynamic> json) {
@@ -32,19 +33,20 @@ class ForYouModel extends Equatable {
       share: json['share'].toString(),
       name: json['name'],
       description: json['description'],
+      imageProfile: json['user']['image_profile'] ?? "no-image",
     );
   }
 
-  ForYouModel copyWith({
-    int? idUser,
-    String? urlVideo,
-    String? like,
-    String? comment,
-    String? save,
-    String? share,
-    String? name,
-    String? description,
-  }) =>
+  ForYouModel copyWith(
+          {int? idUser,
+          String? urlVideo,
+          String? like,
+          String? comment,
+          String? save,
+          String? share,
+          String? name,
+          String? description,
+          String? imageProfile}) =>
       ForYouModel(
         idUser: idUser ?? this.idUser,
         urlVideo: urlVideo ?? this.urlVideo,
@@ -54,8 +56,10 @@ class ForYouModel extends Equatable {
         share: share ?? this.share,
         name: name ?? this.name,
         description: description ?? this.description,
+        imageProfile: imageProfile ?? this.imageProfile,
       );
 
   @override
-  List<Object?> get props => [idUser, urlVideo, like, comment, save, share];
+  List<Object?> get props =>
+      [idUser, urlVideo, like, comment, save, share, imageProfile];
 }

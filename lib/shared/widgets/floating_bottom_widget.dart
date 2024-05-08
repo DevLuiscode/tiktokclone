@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:tiktok_clone/features/home/domain/models/fouryou_model.dart';
-import 'package:tiktok_clone/features/home/ui/bloc/bloc/foryou_bloc.dart';
+
 import 'package:tiktok_clone/shared/constants/colors.dart';
 import 'package:tiktok_clone/shared/constants/icons_svg.dart';
 
@@ -25,8 +25,19 @@ class FloatingButtonsWidget extends StatelessWidget {
               height: 60,
               child: Stack(
                 children: [
-                  const CircleAvatar(
-                    radius: 25,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.white),
+                      shape: BoxShape.circle,
+                    ),
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: item.imageProfile != "no-image"
+                          ? NetworkImage(item.imageProfile)
+                          : const NetworkImage(
+                              'https://as1.ftcdn.net/v2/jpg/05/16/27/58/1000_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'),
+                    ),
                   ),
                   Positioned(
                     bottom: -1,

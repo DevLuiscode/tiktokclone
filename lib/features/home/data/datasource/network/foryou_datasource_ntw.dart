@@ -7,12 +7,24 @@ class ForyouDatasourcesNtw {
 
   Future<List<ForYouModel>> fethFouryouData() async {
     final response = await client.from('videos').select(
-          'id_user,comment,save,like,description,name,share,url',
-        );
+      '''
+          id_user,
+          comment,
+          save,
+          like,
+          description,
+          name,
+          share,
+          url,
+          user: id_user (image_profile)
+          ''',
+    );
+    print(response);
 
     final fourYou = response.map((e) {
       return ForYouModel.fromJson(e);
     }).toList();
+
     return fourYou;
   }
 
