@@ -42,23 +42,43 @@ class _AppbarWidgetState extends State<AppbarWidget> {
                         padding: const EdgeInsets.only(right: 8),
                         child: SvgPicture.asset(
                           IconsSvg.camera,
-                          width: 30,
+                          width: 25,
                         ),
                       ),
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.only(left: 2),
-                          child: const Stack(
+                          child: Stack(
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.green,
-                                radius: 16,
-                              ),
                               Positioned(
-                                left: 10,
-                                child: CircleAvatar(
-                                  radius: 16,
-                                  backgroundColor: Colors.blue,
+                                left: 14,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: AppColors.blue,
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: const CircleAvatar(
+                                    radius: 10,
+                                    backgroundImage: NetworkImage(
+                                        "https://cdn.pixabay.com/photo/2024/04/25/17/19/ai-generated-8720322_1280.jpg"),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.pink,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: const CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      "https://cdn.pixabay.com/photo/2024/04/12/15/46/beautiful-8692180_1280.png"),
+                                  radius: 10,
                                 ),
                               ),
                             ],
@@ -102,7 +122,7 @@ class _AppbarWidgetState extends State<AppbarWidget> {
                         padding: const EdgeInsets.only(right: 12),
                         child: SvgPicture.asset(
                           IconsSvg.live,
-                          height: 30,
+                          height: 25,
                         ),
                       ),
                       SvgPicture.asset(
@@ -137,13 +157,10 @@ class IconAppbarWIdget extends StatelessWidget {
         Text(
           title,
           style: isSelected
-              ? textTheme.headlineSmall!.copyWith(
-                  color: Colors.white,
-                  fontSize: 22,
-                )
-              : textTheme.headlineSmall!.copyWith(
-                  color: AppColors.grey6,
-                  fontSize: 22,
+              ? textTheme.displayLarge
+              : textTheme.displayLarge!.copyWith(
+                  color: AppColors.grey0,
+                  fontWeight: FontWeight.normal,
                 ),
         ),
         const SizedBox(height: 5),

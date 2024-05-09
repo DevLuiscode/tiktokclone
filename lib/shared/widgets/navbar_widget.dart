@@ -75,6 +75,7 @@ class IconNavbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -129,10 +130,15 @@ class IconNavbarWidget extends StatelessWidget {
         ),
         Text(
           name!.isNotEmpty ? name! : "",
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.grey,
-            fontSize: name == 'Bandeja de entrada' ? 10 : 12,
-          ),
+          // style: TextStyle(
+          //   color: isSelected ? Colors.white : Colors.grey,
+          //   fontSize: name == 'Bandeja de entrada' ? 10 : 12,
+          // ),
+          style: isSelected
+              ? textTheme.displaySmall
+              : textTheme.displaySmall!.copyWith(
+                  color: Colors.grey,
+                ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

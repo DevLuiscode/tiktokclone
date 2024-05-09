@@ -23,8 +23,9 @@ class DescriptionWidget extends StatelessWidget {
           children: [
             Text(
               item.name,
-              style: textTheme.bodyLarge,
+              style: textTheme.displayLarge,
             ),
+            const SizedBox(height: 12),
             Text(
               item.description,
               style: textTheme.displayMedium,

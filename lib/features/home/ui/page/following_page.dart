@@ -69,18 +69,19 @@ class _FollowingPageState extends State<FollowingPage> {
           children: [
             Text(
               "Creadores Populares",
-              style: textTheme.bodyLarge,
+              style: textTheme.displayLarge,
             ),
+            const SizedBox(height: 12),
             Text(
               "Sigue una cuenta para ver vides mas recientes\n aqui",
               textAlign: TextAlign.center,
               style: textTheme.displayMedium,
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 24),
             Container(
               height: size.height * 0.5,
               width: double.infinity,
-              color: Colors.transparent,
+              color: const Color.fromARGB(0, 5, 2, 2),
               child: BlocBuilder<FollowingBlocBloc, FollowingBlocState>(
                 builder: (context, state) {
                   if (state.follingStatus == FollowingStatus.loading) {
@@ -153,13 +154,14 @@ class _FollowingPageState extends State<FollowingPage> {
                                     const SizedBox(height: 12),
                                     Text(
                                       item.name,
-                                      style: textTheme.bodySmall!
-                                          .copyWith(color: Colors.white),
+                                      style: textTheme.displayLarge!.copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                     const SizedBox(height: 12),
                                     Text(
                                       "@${item.name}",
-                                      style: textTheme.displaySmall,
+                                      style: textTheme.displayMedium,
                                     ),
                                     const SizedBox(height: 12),
                                     Container(
@@ -173,8 +175,9 @@ class _FollowingPageState extends State<FollowingPage> {
                                       child: Text(
                                         "Seguir",
                                         textAlign: TextAlign.center,
-                                        style: textTheme.titleSmall!
-                                            .copyWith(color: Colors.white),
+                                        style: textTheme.displayLarge!.copyWith(
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                       ),
                                     )
                                   ],

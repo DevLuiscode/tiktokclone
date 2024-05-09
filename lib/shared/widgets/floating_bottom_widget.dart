@@ -49,7 +49,7 @@ class FloatingButtonsWidget extends StatelessWidget {
                       child: SvgPicture.asset(
                         IconsSvg.add,
                         colorFilter: const ColorFilter.mode(
-                          Colors.white,
+                          AppColors.grey,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -59,25 +59,49 @@ class FloatingButtonsWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            SvgPicture.asset(IconsSvg.favorite),
+            SvgPicture.asset(
+              IconsSvg.favorite,
+              colorFilter: const ColorFilter.mode(
+                AppColors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
             Text(
               "${item.like} mill",
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
-            SvgPicture.asset(IconsSvg.comments),
+            SvgPicture.asset(
+              IconsSvg.comments,
+              colorFilter: const ColorFilter.mode(
+                AppColors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
             Text(
               item.comment,
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
-            SvgPicture.asset(IconsSvg.save),
+            SvgPicture.asset(
+              IconsSvg.save,
+              colorFilter: const ColorFilter.mode(
+                AppColors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
             Text(
               item.save,
               style: textTheme.displayMedium,
             ),
             const SizedBox(height: 12),
-            SvgPicture.asset(IconsSvg.share),
+            SvgPicture.asset(
+              IconsSvg.share,
+              colorFilter: const ColorFilter.mode(
+                AppColors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
             Text(
               item.share,
               style: textTheme.displayMedium,
