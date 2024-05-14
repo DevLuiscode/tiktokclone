@@ -42,6 +42,8 @@
     Create a new project in Supabase.
 
     Configure the database using schema.sql.
+<img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlinlang-icon.svg" alt="kotlin" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" 
+    
     Set up your unique Supabase URL and anonymous key in the Flutter app.
     Create an env.json file in the root path:
     {
