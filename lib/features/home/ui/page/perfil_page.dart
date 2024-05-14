@@ -33,7 +33,9 @@ class PerfilPage extends StatelessWidget {
               )
                 ..add(FetchByIdEvent(id: state.id))
                 ..add(FetchInteractionEvent(id: state.id))
-                ..add(FetchMyVideosListEvent(id: state.id)),
+                ..add(FetchMyVideosListEvent(id: state.id))
+                ..add(FetchSharedVideosListEvent(id: state.id))
+                ..add(FetchLikeVideosListEvent(id: state.id)),
               child: NestedScrollView(
                 headerSliverBuilder: (context, index) {
                   return <Widget>[
@@ -70,11 +72,19 @@ class PerfilPage extends StatelessWidget {
                         );
                       },
                     ),
-                    const ListGridWidget(
-                      itemCount: 4,
+                    BlocBuilder<PerfilBloc, PerfilState>(
+                      builder: (context, state) {
+                        return ListGridWidget(
+                          itemCount: state.sharedListVideos.length,
+                        );
+                      },
                     ),
-                    const ListGridWidget(
-                      itemCount: 5,
+                    BlocBuilder<PerfilBloc, PerfilState>(
+                      builder: (context, state) {
+                        return ListGridWidget(
+                          itemCount: state.likeListVideos.length,
+                        );
+                      },
                     ),
                   ],
                 ),

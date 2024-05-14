@@ -30,4 +30,10 @@ class ProfileRepositoryImpl extends ProfileRepository {
     final response = await datasourcesNtw.fetchListSharedvideos(id: idUser);
     return response;
   }
+
+  @override
+  Future<List<MyVideosModel>> fetchListLikeVideos({required idUser}) async {
+    final response = await datasourcesNtw.fetchListLikevideos(id: idUser);
+    return response;
+  }
 }

@@ -21,3 +21,13 @@ class FetchMyVideosListEvent extends PerfilEvent {
   final int id;
   const FetchMyVideosListEvent({required this.id});
 }
+
+class FetchSharedVideosListEvent extends PerfilEvent {
+  final int id;
+  const FetchSharedVideosListEvent({required this.id});
+}
+
+class FetchLikeVideosListEvent extends PerfilEvent {
+  final int id;
+  const FetchLikeVideosListEvent({required this.id});
+}

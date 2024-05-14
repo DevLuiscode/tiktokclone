@@ -4,7 +4,8 @@ import 'package:tiktok_clone/features/home/domain/models/my_videos_model.dart';
 
 abstract class ProfileRepository {
   Future<ForyouProfileModel> fetchByIdProfile({required int id});
-  Future<InteractionModel> fetInteraction({required idUser});
-  Future<List<MyVideosModel>> fetchListMyvideos({required idUser});
-  Future<List<MyVideosModel>> fetchListSharedVideos({required idUser});
+  Future<InteractionModel> fetInteraction({required int idUser});
+  Future<List<MyVideosModel>> fetchListMyvideos({required int idUser});
+  Future<List<MyVideosModel>> fetchListSharedVideos({required int idUser});
+  Future<List<MyVideosModel>> fetchListLikeVideos({required int idUser});
 }

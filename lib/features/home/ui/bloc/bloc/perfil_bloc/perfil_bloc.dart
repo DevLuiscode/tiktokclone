@@ -30,10 +30,14 @@ class PerfilBloc extends Bloc<PerfilEvent, PerfilState> {
             likes: 0,
           ),
           myListVideos: [],
+          sharedListVideos: [],
+          likeListVideos: [],
         )) {
     on<FetchByIdEvent>(perfilEventState);
     on<FetchInteractionEvent>(interactionId);
     on<FetchMyVideosListEvent>(fetchMyVideosListEventState);
+    on<FetchSharedVideosListEvent>(fetchSharedVideosListEventState);
+    on<FetchLikeVideosListEvent>(fetchLikeVideosListEventState);
   }
 
   Future<void> perfilEventState(
@@ -78,6 +82,40 @@ class PerfilBloc extends Bloc<PerfilEvent, PerfilState> {
           await profileRepository.fetchListMyvideos(idUser: event.id);
       emit(state.copyWith(
         myListVideos: object,
+        perfilStatus: PerfilStatus.sucess,
+      ));
+    } catch (e) {
+      emit(state.copyWith(perfilStatus: PerfilStatus.error));
+    }
+  }
+
+  Future<void> fetchSharedVideosListEventState(
+      FetchSharedVideosListEvent event, Emitter<PerfilState> emit) async {
+    emit(state.copyWith(
+      perfilStatus: PerfilStatus.loading,
+    ));
+    try {
+      final object =
+          await profileRepository.fetchListSharedVideos(idUser: event.id);
+      emit(state.copyWith(
+        sharedListVideos: object,
+        perfilStatus: PerfilStatus.sucess,
+      ));
+    } catch (e) {
+      emit(state.copyWith(perfilStatus: PerfilStatus.error));
+    }
+  }
+
+  Future<void> fetchLikeVideosListEventState(
+      FetchLikeVideosListEvent event, Emitter<PerfilState> emit) async {
+    emit(state.copyWith(
+      perfilStatus: PerfilStatus.loading,
+    ));
+    try {
+      final object =
+          await profileRepository.fetchListLikeVideos(idUser: event.id);
+      emit(state.copyWith(
+        likeListVideos: object,
         perfilStatus: PerfilStatus.sucess,
       ));
     } catch (e) {

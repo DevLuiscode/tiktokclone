@@ -85,4 +85,13 @@ class DatasourcesNtw {
     }).toList();
     return object;
   }
+
+  Future<List<MyVideosModel>> fetchListLikevideos({required id}) async {
+    final response =
+        await client.from("like_videos").select().eq("id_user", id);
+    final object = response.map((e) {
+      return MyVideosModel.fromJson(e);
+    }).toList();
+    return object;
+  }
 }
