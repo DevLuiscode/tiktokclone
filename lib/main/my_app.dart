@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomePageControllerCubit(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ligthTheme,
         home: const HomeScreen(),
       ),

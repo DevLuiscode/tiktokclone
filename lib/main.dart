@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tiktok_clone/main/my_app.dart';
@@ -9,6 +11,9 @@ void main() async {
   );
 
   runApp(
-    const MyApp(),
+    DevicePreview(
+      enabled: kReleaseMode,
+      builder: (BuildContext context) => const MyApp(),
+    ),
   );
 }

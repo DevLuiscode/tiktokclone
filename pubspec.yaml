@@ -30,6 +30,7 @@ environment:
 dependencies:
   card_swiper: ^3.0.1
   cupertino_icons: ^1.0.6
+  device_preview: ^1.1.0
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -71,8 +72,8 @@ flutter:
     - family: proximanova
       fonts:
         - asset: assets/fonts/proximanova.otf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+    #       - asset: fonts/Schyler-Italic.ttf
+    #         style: italic
     - family: tiktoksan
       fonts:
         - asset: assets/fonts/TikTokDisplay-Bold.ttf
@@ -81,8 +82,6 @@ flutter:
         - asset: assets/fonts/TikTokText-Bold.ttf
         - asset: assets/fonts/TikTokText-Medium.ttf
         - asset: assets/fonts/TikTokText-Regular.ttf
-        
-
   #         weight: 700
   #
   # For details regarding fonts from package dependencies,

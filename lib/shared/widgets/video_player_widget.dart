@@ -36,7 +36,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           // Actualizar el aspect ratio del widget AspectRatio
           _aspectRatio = aspectRatio;
           if (widget.play) _controller.play();
-          _controller.setLooping(false);
+          _controller.setLooping(true);
         });
       });
     super.initState();
