@@ -35,9 +35,6 @@
     git clone https://github.com/DevLuiscode/tiktokclone.git
     cd tiktok-clone
     Install dependencies:
-
-    bash
-    Copiar código
     flutter pub get
 
 # Configure Supabase:
