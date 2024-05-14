@@ -1,4 +1,4 @@
-# TikTok Clonee
+# TikTok Clone
     Welcome to the repository for my TikTok clone, a mobile application designed to emulate the essential features of the popular social media platform, TikTok. This project showcases my expertise in mobile app development using Flutter and demonstrates advanced techniques in real-time data handling with Supabase, employing clean architecture principles and state management with Flutter Bloc.
 
 # Features
