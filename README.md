@@ -44,12 +44,12 @@
     Configure the database using schema.sql.
     Set up your unique Supabase URL and anonymous key in the Flutter app.
     Create an env.json file in the root path:
-{
+    {
      "supabase-url": "",
      "supabase-key": ""
-}
+    }
     Have the .vscode folder in the main root, then create a launch.json file and have this configuration (this configuration is to safely handle the apikys):
-{
+    {
      "version": "0.2.0",
      "configurations": [
          {
@@ -63,11 +63,11 @@
              ]
          }
      ]
-}
+    }
 
 
 # Architecture
-This project adheres to clean architecture guidelines, which are structured as follows:
+    This project adheres to clean architecture guidelines, which are structured as follows:
 
     Data Layer: Manages data transactions and transformations to and from the database.
 
