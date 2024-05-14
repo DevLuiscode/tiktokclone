@@ -42,7 +42,7 @@
     Create a new project in Supabase.
 
     Configure the database using schema.sql.
-<img src="https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/profile/schemesql.webp" alt="scheme" width="40" height="40"/>
+<img src="https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/profile/schemesql.webp" alt="scheme" width="300" height="200"/>
     
     Set up your unique Supabase URL and anonymous key in the Flutter app.
     Create an env.json file in the root path:
