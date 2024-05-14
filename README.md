@@ -76,7 +76,10 @@ This project adheres to clean architecture guidelines, which are structured as f
     Presentation Layer: Comprises UI components and state management handled by Flutter Bloc.
 
 # Screenshots
-[Include screenshots of the app here]
+![Apple iPhone 11 Pro Max Screenshot 0](https://github.com/DevLuiscode/tiktokclone/assets/146896025/f3bde70e-17f1-4b4b-860d-7783a10ff887)
+![Apple iPhone 11 Pro Max Screenshot 1](https://github.com/DevLuiscode/tiktokclone/assets/146896025/54b260e5-afc7-4450-8683-290fdcf22439)
+![Apple iPhone 11 Pro Max Screenshot 2](https://github.com/DevLuiscode/tiktokclone/assets/146896025/e74495d2-78c0-443e-8057-3ebdc737f377)
+
 
 # Contributions
     Feel free to contribute to this project! Fork the repository and submit pull requests with the proposed changes is for educational use.
