@@ -1,6 +1,7 @@
 ![MasterHeader](https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/profile/tiktokclone.webp)
-# Donwload Apk 
-<a>https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/profile/tiktok_clone.apk?t=2024-05-14T20%3A22%3A31.220Z<a/>
+## Download APK
+Download the latest version of the app:
+<a href="[https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/profile/weather_app.apk?t=2024-05-14T22%3A39%3A11.594Z](https://zphhqkbfmmilwzqcmdgu.supabase.co/storage/v1/object/public/profile/tiktok_clone.apk?t=2024-05-14T20%3A22%3A31.220Z)">Download APK</a>
 # TikTok Clone
     Welcome to the repository for my TikTok clone, a mobile application designed to emulate the essential features of the popular social media platform, TikTok. This project showcases my expertise in mobile app development using Flutter and demonstrates advanced techniques in real-time data handling with Supabase, employing clean architecture principles and state management with Flutter Bloc.
 
