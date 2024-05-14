@@ -115,7 +115,7 @@ class _FollowingPageState extends State<FollowingPage> {
                                 height: size.height * 0.5,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: AppColors.grey2,
+                                  color: AppColors.grey0,
                                   borderRadius: BorderRadius.circular(20),
                                 ), // Placeholder for the actual content
                                 child: index == _currentPage

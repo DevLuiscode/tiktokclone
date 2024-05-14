@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tiktok_clone/features/home/data/datasource/network/datasource_ntw.dart';
 import 'package:tiktok_clone/features/home/data/repositories/profile_repository_impl.dart';
+import 'package:tiktok_clone/features/home/domain/models/my_videos_model.dart';
 import 'package:tiktok_clone/features/home/ui/bloc/bloc/perfil_bloc/perfil_bloc.dart';
 import 'package:tiktok_clone/features/home/ui/bloc/cubit/home_page_controller_cubit.dart';
 import 'package:tiktok_clone/shared/constants/colors.dart';
 import 'package:tiktok_clone/shared/constants/icons_svg.dart';
+import 'package:tiktok_clone/shared/widgets/video_player_widget.dart';
 
 class PerfilPage extends StatelessWidget {
   const PerfilPage({
@@ -69,6 +71,7 @@ class PerfilPage extends StatelessWidget {
                       builder: (context, state) {
                         return ListGridWidget(
                           itemCount: state.myListVideos.length,
+                          listVideos: state.myListVideos,
                         );
                       },
                     ),
@@ -76,6 +79,7 @@ class PerfilPage extends StatelessWidget {
                       builder: (context, state) {
                         return ListGridWidget(
                           itemCount: state.sharedListVideos.length,
+                          listVideos: state.sharedListVideos,
                         );
                       },
                     ),
@@ -83,6 +87,7 @@ class PerfilPage extends StatelessWidget {
                       builder: (context, state) {
                         return ListGridWidget(
                           itemCount: state.likeListVideos.length,
+                          listVideos: state.likeListVideos,
                         );
                       },
                     ),
@@ -290,13 +295,11 @@ class FollowingWidget extends StatelessWidget {
 }
 
 class ListGridWidget extends StatelessWidget {
-  const ListGridWidget({
-    super.key,
-    required this.itemCount,
-  });
+  const ListGridWidget(
+      {super.key, required this.itemCount, required this.listVideos});
 
   final int itemCount;
-
+  final List<MyVideosModel> listVideos;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -310,8 +313,14 @@ class ListGridWidget extends StatelessWidget {
         crossAxisSpacing: 1,
       ),
       itemBuilder: (context, index) {
+        final item = listVideos[index];
         return Container(
-          color: Colors.pink,
+          color: AppColors.grey,
+          child: VideoPlayerWidget(
+            play: false,
+            ktoplbarheigh: false,
+            url: item.url,
+          ),
         );
       },
     );
