@@ -23,14 +23,14 @@
     Prerequisites
     You will need the following tools installed on your machine:
 
-    Flutter (vX.X.X or above)
-    Dart (vX.X.X or above)
+    Flutter 3.19.3
+    Dart 3.3.1
     An IDE (VSCode, Android Studio, or IntelliJ)
     Installation
     Clone the repository:
 
     bash
-    git clone https://github.com/yourusername/tiktok-clone.git
+    git clone https://github.com/DevLuiscode/tiktokclone.git
     cd tiktok-clone
     Install dependencies:
 
