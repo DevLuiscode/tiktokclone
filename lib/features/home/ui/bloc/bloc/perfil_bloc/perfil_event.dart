@@ -16,3 +16,8 @@ class FetchInteractionEvent extends PerfilEvent {
   final int id;
   const FetchInteractionEvent({required this.id});
 }
+
+class FetchMyVideosListEvent extends PerfilEvent {
+  final int id;
+  const FetchMyVideosListEvent({required this.id});
+}

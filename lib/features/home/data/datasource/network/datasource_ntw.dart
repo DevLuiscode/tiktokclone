@@ -76,4 +76,13 @@ class DatasourcesNtw {
     }).toList();
     return object;
   }
+
+  Future<List<MyVideosModel>> fetchListSharedvideos({required id}) async {
+    final response =
+        await client.from("shared_videos").select().eq("id_user", id);
+    final object = response.map((e) {
+      return MyVideosModel.fromJson(e);
+    }).toList();
+    return object;
+  }
 }

@@ -25,41 +25,59 @@ class PerfilPage extends StatelessWidget {
           color: Colors.white,
           child: DefaultTabController(
             length: 3,
-            child: NestedScrollView(
-              headerSliverBuilder: (context, index) {
-                return <Widget>[
-                  SliverAppbarWidget(
-                    id: state.id,
-                  ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: MyDelegate(
-                      tabBar: const TabBar(
-                        tabs: [
-                          Tab(
-                            icon: Icon(Icons.menu),
-                          ),
-                          Tab(
-                            icon: Icon(Icons.share_outlined),
-                          ),
-                          Tab(
-                            icon: Icon(Icons.favorite_border_outlined),
-                          ),
-                        ],
-                        indicatorColor: Colors.black87,
-                        unselectedLabelColor: Colors.grey,
-                        labelColor: Colors.black,
+            child: BlocProvider(
+              create: (context) => PerfilBloc(
+                profileRepository: ProfileRepositoryImpl(
+                  datasourcesNtw: DatasourcesNtw(),
+                ),
+              )
+                ..add(FetchByIdEvent(id: state.id))
+                ..add(FetchInteractionEvent(id: state.id))
+                ..add(FetchMyVideosListEvent(id: state.id)),
+              child: NestedScrollView(
+                headerSliverBuilder: (context, index) {
+                  return <Widget>[
+                    const SliverAppbarWidget(),
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: MyDelegate(
+                        tabBar: const TabBar(
+                          tabs: [
+                            Tab(
+                              icon: Icon(Icons.menu),
+                            ),
+                            Tab(
+                              icon: Icon(Icons.share_outlined),
+                            ),
+                            Tab(
+                              icon: Icon(Icons.favorite_border_outlined),
+                            ),
+                          ],
+                          indicatorColor: Colors.black87,
+                          unselectedLabelColor: Colors.grey,
+                          labelColor: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                ];
-              },
-              body: const TabBarView(
-                children: [
-                  ListGridWidget(),
-                  ListGridWidget(),
-                  ListGridWidget(),
-                ],
+                  ];
+                },
+                body: TabBarView(
+                  children: [
+                    BlocBuilder<PerfilBloc, PerfilState>(
+                      builder: (context, state) {
+                        return ListGridWidget(
+                          itemCount: state.myListVideos.length,
+                        );
+                      },
+                    ),
+                    const ListGridWidget(
+                      itemCount: 4,
+                    ),
+                    const ListGridWidget(
+                      itemCount: 5,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -70,175 +88,166 @@ class PerfilPage extends StatelessWidget {
 }
 
 class SliverAppbarWidget extends StatelessWidget {
-  const SliverAppbarWidget({super.key, required this.id});
-
-  final int id;
+  const SliverAppbarWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
-    return BlocProvider(
-      create: (context) => PerfilBloc(
-        profileRepository: ProfileRepositoryImpl(
-          datasourcesNtw: DatasourcesNtw(),
-        ),
-      )
-        ..add(FetchByIdEvent(id: id))
-        ..add(FetchInteractionEvent(id: id)),
-      child: BlocBuilder<PerfilBloc, PerfilState>(
-        builder: (context, state) {
-          final item = state.foryouProfileModel;
-          return SliverAppBar(
-            leading: const Icon(Icons.arrow_back_ios),
-            pinned: true,
-            actions: [
-              SvgPicture.asset(
-                IconsSvg.bell,
+    return BlocBuilder<PerfilBloc, PerfilState>(
+      builder: (context, state) {
+        final item = state.foryouProfileModel;
+        return SliverAppBar(
+          leading: const Icon(Icons.arrow_back_ios),
+          pinned: true,
+          actions: [
+            SvgPicture.asset(
+              IconsSvg.bell,
+              height: 30,
+              colorFilter: const ColorFilter.mode(
+                Colors.black,
+                BlendMode.srcIn,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: SvgPicture.asset(
+                IconsSvg.shareOutlined,
                 height: 30,
                 colorFilter: const ColorFilter.mode(
                   Colors.black,
                   BlendMode.srcIn,
                 ),
               ),
-              const SizedBox(width: 8),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: SvgPicture.asset(
-                  IconsSvg.shareOutlined,
-                  height: 30,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.black,
-                    BlendMode.srcIn,
+            ),
+          ],
+          title: Text(
+            item.name,
+            style: textTheme.displayLarge!.copyWith(color: Colors.black),
+          ),
+          centerTitle: true,
+          surfaceTintColor: Colors.white,
+          backgroundColor: Colors.white,
+          expandedHeight: size.height * 0.4,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              padding: const EdgeInsets.only(top: kToolbarHeight),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: item.imageProfile.isNotEmpty
+                        ? NetworkImage(item.imageProfile)
+                        : const NetworkImage(
+                            'https://as1.ftcdn.net/v2/jpg/05/16/27/58/1000_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'),
                   ),
-                ),
-              ),
-            ],
-            title: Text(
-              item.name,
-              style: textTheme.displayLarge!.copyWith(color: Colors.black),
-            ),
-            centerTitle: true,
-            surfaceTintColor: Colors.white,
-            backgroundColor: Colors.white,
-            expandedHeight: size.height * 0.4,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                padding: const EdgeInsets.only(top: kToolbarHeight),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: item.imageProfile.isNotEmpty
-                          ? NetworkImage(item.imageProfile)
-                          : const NetworkImage(
-                              'https://as1.ftcdn.net/v2/jpg/05/16/27/58/1000_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'),
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      item.email,
-                      style: textTheme.displayMedium,
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FollowingWidget(
-                          number: state.interactionModel.following.toString(),
-                          name: 'Siguiendo',
-                        ),
-                        Container(
-                          height: 30,
-                          width: 1,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          color: AppColors.grey,
-                        ),
-                        FollowingWidget(
-                          number: state.interactionModel.follores.toString(),
-                          name: 'Seguidores',
-                        ),
-                        Container(
-                          height: 30,
-                          width: 1,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          color: AppColors.grey,
-                        ),
-                        FollowingWidget(
-                          number: state.interactionModel.likes.toString(),
-                          name: 'Me gusta',
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: 47,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: AppColors.pink,
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          child: Text(
-                            "Seguir",
-                            style: textTheme.displayMedium!
-                                .copyWith(color: Colors.white),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 47,
-                          width: 120,
-                          decoration: BoxDecoration(
-                            color: AppColors.grey,
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          child: Text(
-                            "Mensajes",
-                            style: textTheme.displayMedium,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 47,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            color: AppColors.grey,
-                            borderRadius: BorderRadius.circular(9),
-                          ),
-                          child: const Icon(Icons.arrow_drop_down),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      item.lastName,
-                      style: textTheme.displayLarge!.copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                  const SizedBox(height: 12),
+                  Text(
+                    item.email,
+                    style: textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FollowingWidget(
+                        number: state.interactionModel.following.toString(),
+                        name: 'Siguiendo',
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Instagram",
-                      style: textTheme.displayLarge!.copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                      Container(
+                        height: 30,
+                        width: 1,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        color: AppColors.grey,
                       ),
+                      FollowingWidget(
+                        number: state.interactionModel.follores.toString(),
+                        name: 'Seguidores',
+                      ),
+                      Container(
+                        height: 30,
+                        width: 1,
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        color: AppColors.grey,
+                      ),
+                      FollowingWidget(
+                        number: state.interactionModel.likes.toString(),
+                        name: 'Me gusta',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: 47,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: AppColors.pink,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                        child: Text(
+                          "Seguir",
+                          style: textTheme.displayMedium!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 47,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          color: AppColors.grey,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                        child: Text(
+                          "Mensajes",
+                          style: textTheme.displayMedium,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        alignment: Alignment.center,
+                        height: 47,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.grey,
+                          borderRadius: BorderRadius.circular(9),
+                        ),
+                        child: const Icon(Icons.arrow_drop_down),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    item.lastName,
+                    style: textTheme.displayLarge!.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Instagram",
+                    style: textTheme.displayLarge!.copyWith(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -273,11 +282,15 @@ class FollowingWidget extends StatelessWidget {
 class ListGridWidget extends StatelessWidget {
   const ListGridWidget({
     super.key,
+    required this.itemCount,
   });
+
+  final int itemCount;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      itemCount: itemCount,
       physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
