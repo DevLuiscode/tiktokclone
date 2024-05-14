@@ -1,4 +1,4 @@
-![MasterHeader](https://assets-global.website-files.com/6344c9cef89d6f2270a38908/6584ce50b417f2b4cfae947a_Mobile%20App%20Developer%20Stats%2C%20Trends%2C%20and%20Forecasts%20for%202024.webp)
+![MasterHeader] ![Apple iPhone 11 Pro Max Screenshot 0](https://github.com/DevLuiscode/tiktokclone/assets/146896025/f3bde70e-17f1-4b4b-860d-7783a10ff887)
 # TikTok Clone
     Welcome to the repository for my TikTok clone, a mobile application designed to emulate the essential features of the popular social media platform, TikTok. This project showcases my expertise in mobile app development using Flutter and demonstrates advanced techniques in real-time data handling with Supabase, employing clean architecture principles and state management with Flutter Bloc.
 
@@ -77,7 +77,7 @@
     Presentation Layer: Comprises UI components and state management handled by Flutter Bloc.
 
 # Screenshots
-![Apple iPhone 11 Pro Max Screenshot 0](https://github.com/DevLuiscode/tiktokclone/assets/146896025/f3bde70e-17f1-4b4b-860d-7783a10ff887)
+
 ![Apple iPhone 11 Pro Max Screenshot 1](https://github.com/DevLuiscode/tiktokclone/assets/146896025/54b260e5-afc7-4450-8683-290fdcf22439)
 ![Apple iPhone 11 Pro Max Screenshot 2](https://github.com/DevLuiscode/tiktokclone/assets/146896025/e74495d2-78c0-443e-8057-3ebdc737f377)
 
