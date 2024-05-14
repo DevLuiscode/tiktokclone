@@ -58,7 +58,7 @@ final ligthTheme = ThemeData(
     ),
     displayMedium: const TextStyle().copyWith(
       fontSize: 13,
-      color: AppColors.grey,
+      color: AppColors.grey0,
       fontWeight: FontWeight.normal,
       fontFamily: "tiktoksan",
     ),

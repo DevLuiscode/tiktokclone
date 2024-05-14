@@ -36,7 +36,7 @@ class ForyouBloc extends Bloc<ForyouEvent, ForyouState> {
     }
   }
 
-  FutureOr<void> getByIdEventState(
+  Future<void> getByIdEventState(
       GetByIdEvent event, Emitter<ForyouState> emit) async {
     final profileList = [...state.profilesList];
     try {

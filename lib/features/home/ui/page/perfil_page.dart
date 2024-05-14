@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tiktok_clone/features/home/data/datasource/network/datasource_ntw.dart';
+import 'package:tiktok_clone/features/home/data/repositories/profile_repository_impl.dart';
+import 'package:tiktok_clone/features/home/ui/bloc/bloc/perfil_bloc/perfil_bloc.dart';
+import 'package:tiktok_clone/features/home/ui/bloc/cubit/home_page_controller_cubit.dart';
 import 'package:tiktok_clone/shared/constants/colors.dart';
 import 'package:tiktok_clone/shared/constants/icons_svg.dart';
 
@@ -11,197 +16,226 @@ class PerfilPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height,
-      width: size.width,
-      color: Colors.white,
-      child: DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, index) {
-            return <Widget>[
-              const SliverAppbarWidget(),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: MyDelegate(
-                  tabBar: const TabBar(
-                    tabs: [
-                      Tab(
-                        icon: Icon(Icons.menu),
-                      ),
-                      Tab(
-                        icon: Icon(Icons.share_outlined),
-                      ),
-                      Tab(
-                        icon: Icon(Icons.favorite_border_outlined),
-                      ),
-                    ],
-                    indicatorColor: Colors.black87,
-                    unselectedLabelColor: Colors.grey,
-                    labelColor: Colors.black,
+
+    return BlocBuilder<HomePageControllerCubit, HomePageControllerState>(
+      builder: (context, state) {
+        return Container(
+          height: size.height,
+          width: size.width,
+          color: Colors.white,
+          child: DefaultTabController(
+            length: 3,
+            child: NestedScrollView(
+              headerSliverBuilder: (context, index) {
+                return <Widget>[
+                  SliverAppbarWidget(
+                    id: state.id,
                   ),
-                ),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: MyDelegate(
+                      tabBar: const TabBar(
+                        tabs: [
+                          Tab(
+                            icon: Icon(Icons.menu),
+                          ),
+                          Tab(
+                            icon: Icon(Icons.share_outlined),
+                          ),
+                          Tab(
+                            icon: Icon(Icons.favorite_border_outlined),
+                          ),
+                        ],
+                        indicatorColor: Colors.black87,
+                        unselectedLabelColor: Colors.grey,
+                        labelColor: Colors.black,
+                      ),
+                    ),
+                  ),
+                ];
+              },
+              body: const TabBarView(
+                children: [
+                  ListGridWidget(),
+                  ListGridWidget(),
+                  ListGridWidget(),
+                ],
               ),
-            ];
-          },
-          body: const TabBarView(
-            children: [
-              ListGridWidget(),
-              ListGridWidget(),
-              ListGridWidget(),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
 class SliverAppbarWidget extends StatelessWidget {
-  const SliverAppbarWidget({
-    super.key,
-  });
+  const SliverAppbarWidget({super.key, required this.id});
+
+  final int id;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
-    return SliverAppBar(
-      leading: const Icon(Icons.arrow_back_ios),
-      pinned: true,
-      actions: [
-        SvgPicture.asset(
-          IconsSvg.bell,
-          height: 30,
-          colorFilter: const ColorFilter.mode(
-            Colors.black,
-            BlendMode.srcIn,
-          ),
+    return BlocProvider(
+      create: (context) => PerfilBloc(
+        profileRepository: ProfileRepositoryImpl(
+          datasourcesNtw: DatasourcesNtw(),
         ),
-        const SizedBox(width: 8),
-        Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: SvgPicture.asset(
-            IconsSvg.shareOutlined,
-            height: 30,
-            colorFilter: const ColorFilter.mode(
-              Colors.black,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-      ],
-      title: Text(
-        "Mente estoica SPQR",
-        style: textTheme.bodySmall,
-      ),
-      centerTitle: true,
-      surfaceTintColor: Colors.white,
-      backgroundColor: Colors.white,
-      expandedHeight: size.height * 0.4,
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          padding: const EdgeInsets.only(top: kToolbarHeight),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.grey,
+      )..add(FetchByIdEvent(id: id)),
+      child: BlocBuilder<PerfilBloc, PerfilState>(
+        builder: (context, state) {
+          final item = state.foryouProfileModel;
+          return SliverAppBar(
+            leading: const Icon(Icons.arrow_back_ios),
+            pinned: true,
+            actions: [
+              SvgPicture.asset(
+                IconsSvg.bell,
+                height: 30,
+                colorFilter: const ColorFilter.mode(
+                  Colors.black,
+                  BlendMode.srcIn,
+                ),
               ),
-              const SizedBox(height: 12),
-              Text(
-                "@Tesla.com",
-                style: textTheme.titleSmall,
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const FollowingWidget(
-                    number: '732',
-                    name: 'Siguiendo',
+              const SizedBox(width: 8),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: SvgPicture.asset(
+                  IconsSvg.shareOutlined,
+                  height: 30,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.black,
+                    BlendMode.srcIn,
                   ),
-                  Container(
-                    height: 30,
-                    width: 1,
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    color: AppColors.grey,
-                  ),
-                  const FollowingWidget(
-                    number: '77,1 mill',
-                    name: 'Seguidores',
-                  ),
-                  Container(
-                    height: 30,
-                    width: 1,
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    color: AppColors.grey,
-                  ),
-                  const FollowingWidget(
-                    number: '8439,2 mill',
-                    name: 'Me gusta',
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 47,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: AppColors.pink,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: Text(
-                      "Seguir",
-                      style:
-                          textTheme.titleSmall!.copyWith(color: Colors.white),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 47,
-                    width: 120,
-                    decoration: BoxDecoration(
-                      color: AppColors.grey,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: Text(
-                      "Mensajes",
-                      style: textTheme.titleSmall,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 47,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.grey,
-                      borderRadius: BorderRadius.circular(9),
-                    ),
-                    child: const Icon(Icons.arrow_drop_down),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Fortaleza en la adversidad",
-                style: textTheme.titleSmall,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Instagram",
-                style: textTheme.titleSmall,
+                ),
               ),
             ],
-          ),
-        ),
+            title: Text(
+              item.name,
+              style: textTheme.displayLarge!.copyWith(color: Colors.black),
+            ),
+            centerTitle: true,
+            surfaceTintColor: Colors.white,
+            backgroundColor: Colors.white,
+            expandedHeight: size.height * 0.4,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                padding: const EdgeInsets.only(top: kToolbarHeight),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundColor: Colors.grey,
+                      backgroundImage: item.imageProfile.isNotEmpty
+                          ? NetworkImage(item.imageProfile)
+                          : const NetworkImage(
+                              'https://as1.ftcdn.net/v2/jpg/05/16/27/58/1000_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      item.email,
+                      style: textTheme.displayMedium,
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const FollowingWidget(
+                          number: '732',
+                          name: 'Siguiendo',
+                        ),
+                        Container(
+                          height: 30,
+                          width: 1,
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          color: AppColors.grey,
+                        ),
+                        const FollowingWidget(
+                          number: '77,1 mill',
+                          name: 'Seguidores',
+                        ),
+                        Container(
+                          height: 30,
+                          width: 1,
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          color: AppColors.grey,
+                        ),
+                        const FollowingWidget(
+                          number: '8439,2 mill',
+                          name: 'Me gusta',
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: 47,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: AppColors.pink,
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: Text(
+                            "Seguir",
+                            style: textTheme.displayMedium!
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 47,
+                          width: 120,
+                          decoration: BoxDecoration(
+                            color: AppColors.grey,
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: Text(
+                            "Mensajes",
+                            style: textTheme.displayMedium,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 47,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: AppColors.grey,
+                            borderRadius: BorderRadius.circular(9),
+                          ),
+                          child: const Icon(Icons.arrow_drop_down),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      item.lastName,
+                      style: textTheme.displayLarge!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "Instagram",
+                      style: textTheme.displayLarge!.copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -223,11 +257,11 @@ class FollowingWidget extends StatelessWidget {
       children: [
         Text(
           number,
-          style: textTheme.displayLarge,
+          style: textTheme.displayLarge!.copyWith(color: Colors.black),
         ),
         Text(
           name,
-          style: textTheme.displaySmall,
+          style: textTheme.displayMedium,
         ),
       ],
     );

@@ -32,7 +32,7 @@ class FloatingButtonsWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                     child: CircleAvatar(
-                      radius: 25,
+                      radius: 20,
                       backgroundImage: item.imageProfile != "no-image"
                           ? NetworkImage(item.imageProfile)
                           : const NetworkImage(
@@ -61,6 +61,7 @@ class FloatingButtonsWidget extends StatelessWidget {
             const SizedBox(height: 12),
             SvgPicture.asset(
               IconsSvg.favorite,
+              height: 25,
               colorFilter: const ColorFilter.mode(
                 AppColors.grey,
                 BlendMode.srcIn,
@@ -73,6 +74,7 @@ class FloatingButtonsWidget extends StatelessWidget {
             const SizedBox(height: 12),
             SvgPicture.asset(
               IconsSvg.comments,
+              height: 25,
               colorFilter: const ColorFilter.mode(
                 AppColors.grey,
                 BlendMode.srcIn,
@@ -85,6 +87,7 @@ class FloatingButtonsWidget extends StatelessWidget {
             const SizedBox(height: 12),
             SvgPicture.asset(
               IconsSvg.save,
+              height: 25,
               colorFilter: const ColorFilter.mode(
                 AppColors.grey,
                 BlendMode.srcIn,
@@ -97,6 +100,7 @@ class FloatingButtonsWidget extends StatelessWidget {
             const SizedBox(height: 12),
             SvgPicture.asset(
               IconsSvg.share,
+              height: 25,
               colorFilter: const ColorFilter.mode(
                 AppColors.grey,
                 BlendMode.srcIn,

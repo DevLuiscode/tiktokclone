@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tiktok_clone/features/home/ui/bloc/bloc/foryou_bloc/foryou_bloc.dart';
+import 'package:tiktok_clone/features/home/ui/bloc/cubit/home_page_controller_cubit.dart';
 import 'package:tiktok_clone/shared/widgets/description_widget.dart';
 
 import 'package:tiktok_clone/shared/widgets/floating_bottom_widget.dart';
@@ -37,6 +38,7 @@ class ForyouPage extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 final item = state.foryouList[index];
+                context.read<HomePageControllerCubit>().idToPage(item.idUser);
                 return SizedBox(
                   height: size.height,
                   width: size.width,

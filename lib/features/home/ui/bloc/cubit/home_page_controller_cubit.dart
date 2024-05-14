@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,7 +8,7 @@ class HomePageControllerCubit extends Cubit<HomePageControllerState> {
   HomePageControllerCubit()
       : super(
           HomePageControllerState(
-              pageController: PageController(initialPage: 1), page: 1),
+              pageController: PageController(initialPage: 1), page: 1, id: -1),
         );
 
   void updatePage({required int page}) {
@@ -29,6 +30,12 @@ class HomePageControllerCubit extends Cubit<HomePageControllerState> {
 
   int getCurrentPageIndex() {
     return state.pageController.page?.round() ?? 0;
+  }
+
+  void idToPage(int id) {
+    emit(state.copyWith(
+      id: id,
+    ));
   }
 
   @override

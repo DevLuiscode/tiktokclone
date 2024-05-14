@@ -5,7 +5,6 @@ import 'package:tiktok_clone/features/home/data/repositories/following_repositor
 import 'package:tiktok_clone/features/home/ui/bloc/bloc/following_bloc/following_bloc_bloc.dart';
 
 import 'package:tiktok_clone/shared/constants/colors.dart';
-
 import 'package:tiktok_clone/shared/widgets/video_player_widget.dart';
 
 class FollowingPage extends StatefulWidget {
@@ -25,18 +24,19 @@ class _FollowingPageState extends State<FollowingPage> {
   @override
   void initState() {
     super.initState();
+
     _pageController.addListener(_handlePageChange);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        setState(() {
-          // Forzar un redibujado
-        });
+        setState(() {});
       }
     });
   }
 
   void _handlePageChange() {
     int page = _pageController.page!.round();
+
     if (_currentPage != page) {
       setState(() {
         _currentPage = page;
@@ -77,7 +77,6 @@ class _FollowingPageState extends State<FollowingPage> {
               textAlign: TextAlign.center,
               style: textTheme.displayMedium,
             ),
-            const SizedBox(height: 24),
             Container(
               height: size.height * 0.5,
               width: double.infinity,
@@ -102,7 +101,7 @@ class _FollowingPageState extends State<FollowingPage> {
                             double value = 1.0;
                             if (_pageController.position.haveDimensions) {
                               value = _pageController.page! - index;
-                              value = (1 - (value.abs() * 0.1)).clamp(0.8, 1.0);
+                              value = (1 - (value.abs() * 0.2)).clamp(0.8, 1.0);
                             }
                             return Transform.scale(
                               scale: value,

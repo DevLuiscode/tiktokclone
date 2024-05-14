@@ -21,7 +21,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
     return Container(
       color: Colors.black,
       padding: const EdgeInsets.symmetric(horizontal: 0),
-      height: widget.preferredSize.height * 1.4,
+      height: widget.preferredSize.height,
       width: widget.preferredSize.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
