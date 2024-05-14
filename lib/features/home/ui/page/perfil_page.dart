@@ -83,7 +83,9 @@ class SliverAppbarWidget extends StatelessWidget {
         profileRepository: ProfileRepositoryImpl(
           datasourcesNtw: DatasourcesNtw(),
         ),
-      )..add(FetchByIdEvent(id: id)),
+      )
+        ..add(FetchByIdEvent(id: id))
+        ..add(FetchInteractionEvent(id: id)),
       child: BlocBuilder<PerfilBloc, PerfilState>(
         builder: (context, state) {
           final item = state.foryouProfileModel;
@@ -143,8 +145,8 @@ class SliverAppbarWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const FollowingWidget(
-                          number: '732',
+                        FollowingWidget(
+                          number: state.interactionModel.following.toString(),
                           name: 'Siguiendo',
                         ),
                         Container(
@@ -153,8 +155,8 @@ class SliverAppbarWidget extends StatelessWidget {
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           color: AppColors.grey,
                         ),
-                        const FollowingWidget(
-                          number: '77,1 mill',
+                        FollowingWidget(
+                          number: state.interactionModel.follores.toString(),
                           name: 'Seguidores',
                         ),
                         Container(
@@ -163,8 +165,8 @@ class SliverAppbarWidget extends StatelessWidget {
                           margin: const EdgeInsets.symmetric(horizontal: 10),
                           color: AppColors.grey,
                         ),
-                        const FollowingWidget(
-                          number: '8439,2 mill',
+                        FollowingWidget(
+                          number: state.interactionModel.likes.toString(),
                           name: 'Me gusta',
                         ),
                       ],

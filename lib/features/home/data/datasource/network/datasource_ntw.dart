@@ -2,6 +2,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tiktok_clone/features/home/domain/models/following_model.dart';
 import 'package:tiktok_clone/features/home/domain/models/foryou_profile_model.dart';
 import 'package:tiktok_clone/features/home/domain/models/fouryou_model.dart';
+import 'package:tiktok_clone/features/home/domain/models/interaction_model.dart';
+import 'package:tiktok_clone/features/home/domain/models/my_videos_model.dart';
 
 class DatasourcesNtw {
   final client = Supabase.instance.client;
@@ -55,5 +57,23 @@ class DatasourcesNtw {
 
     final objectModel = ForyouProfileModel.fromJson(response);
     return objectModel;
+  }
+
+  Future<InteractionModel> fetchInteraction({required idUser}) async {
+    final response = await client
+        .from("interactions")
+        .select()
+        .eq('id_user', idUser)
+        .single();
+    final objectModel = InteractionModel.fromJson(response);
+    return objectModel;
+  }
+
+  Future<List<MyVideosModel>> fetchListMyvideos({required id}) async {
+    final response = await client.from("my_videos").select().eq("id_user", id);
+    final object = response.map((e) {
+      return MyVideosModel.fromJson(e);
+    }).toList();
+    return object;
   }
 }
