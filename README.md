@@ -77,8 +77,5 @@
 
     Presentation Layer: Comprises UI components and state management handled by Flutter Bloc.
 
-# Screenshots
-
-
 # Contributions
     Feel free to contribute to this project! Fork the repository and submit pull requests with the proposed changes is for educational use.
